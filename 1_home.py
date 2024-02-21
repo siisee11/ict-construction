@@ -10,9 +10,7 @@ from llama_index.core import Settings
 
 import llama_index.core
 
-from dotenv import load_dotenv
-
-load_dotenv()
+os.environ["OPENAI_API_KEY"] = st.secrets.openai_key
 
 llama_index.core.set_global_handler("arize_phoenix")
 
