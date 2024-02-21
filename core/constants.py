@@ -1,0 +1,6 @@
+DATA_ROOT = "../../data/ICT-construction"
+INDEX_ROOT = "./indexes"
+INQUERY_DATA_PATH = f"{DATA_ROOT}/inquiry_qa_pairs.csv"
+ACT_DATA_PATH = f"{DATA_ROOT}/ict_act.csv"
+INQUIRY_INDEX_PERSIST_DIR = f"{INDEX_ROOT}/inquiry"
+ACT_INDEX_PERSIST_DIR = f"{INDEX_ROOT}/ict_act"

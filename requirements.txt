@@ -3,3 +3,9 @@ numpy
 pandas
 pydeck
 streamlit
+openai
+llama_index
+python-dotenv
+llama-index-embeddings-openai
+arize-phoenix
+llama-index-callbacks-arize-phoenix
