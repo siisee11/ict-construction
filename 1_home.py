@@ -4,7 +4,11 @@ import openai
 
 from core.pipeline_builder import build_query_pipeline
 from core.index_builder.inquiry_index_builder import load_inquiry_index
-from core.index_builder.act_index_builder import load_act_index
+from core.index_builder.act_index_builder import (
+    load_act_index,
+    load_act_enforcement_index,
+)
+from core.utils import draw_dag
 from llama_index.embeddings.openai import OpenAIEmbedding
 from llama_index.core import Settings
 
@@ -13,8 +17,10 @@ import llama_index.core
 os.environ["OPENAI_API_KEY"] = st.secrets.openai_key
 
 import phoenix as px
+
 px.launch_app()
 import llama_index.core
+
 llama_index.core.set_global_handler("arize_phoenix")
 
 embed_model = OpenAIEmbedding(
@@ -46,11 +52,17 @@ def load_indexes():
     with st.spinner(text="데이터를 로딩중 입니다. 잠시만 기다려주세요."):
         inquiry_index = load_inquiry_index()
         act_index = load_act_index()
-        return {"inquiry": inquiry_index, "act": act_index}
+        act_enforcement_index = load_act_enforcement_index()
+        return {
+            "inquiry": inquiry_index,
+            "act": act_index,
+            "act_enforcement": act_enforcement_index,
+        }
 
 
 indexes = load_indexes()
 qp = build_query_pipeline(indexes)
+draw_dag(qp)
 
 if "query_pipeline" not in st.session_state.keys():  # Initialize the chat engine
     st.session_state.query_pipeline = qp
