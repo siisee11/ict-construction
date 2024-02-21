@@ -12,6 +12,9 @@ import llama_index.core
 
 os.environ["OPENAI_API_KEY"] = st.secrets.openai_key
 
+import phoenix as px
+px.launch_app()
+import llama_index.core
 llama_index.core.set_global_handler("arize_phoenix")
 
 embed_model = OpenAIEmbedding(
